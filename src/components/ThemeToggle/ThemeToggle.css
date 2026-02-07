@@ -1,0 +1,216 @@
+/* ============================================
+   THEME TOGGLE COMPONENT
+   Retro-futuristic dark/light mode switch
+   ============================================ */
+
+.theme-toggle-container {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.theme-toggle-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-sm);
+  transition: all var(--transition-normal);
+}
+
+.theme-toggle-btn:hover {
+  transform: scale(1.05);
+}
+
+.toggle-track {
+  position: relative;
+  width: 70px;
+  height: 32px;
+  background: linear-gradient(135deg, var(--bg-dark-2) 0%, var(--bg-dark-3) 100%);
+  border: 2px solid var(--primary-cyan);
+  border-radius: var(--radius-full);
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.5),
+    0 0 20px rgba(0, 255, 255, 0.4);
+  transition: all var(--transition-normal);
+  overflow: hidden;
+}
+
+.toggle-track.light {
+  background: linear-gradient(135deg, #e6eef5 0%, #dce6f0 100%);
+  border-color: #0099cc;
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.1),
+    0 0 15px rgba(0, 153, 204, 0.3);
+}
+
+.toggle-icons {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 6px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.icon-sun,
+.icon-moon {
+  font-size: 14px;
+  transition: all var(--transition-normal);
+}
+
+.toggle-track.dark .icon-moon {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.toggle-track.dark .icon-sun {
+  opacity: 0.3;
+  transform: scale(0.8) rotate(-180deg);
+}
+
+.toggle-track.light .icon-sun {
+  opacity: 1;
+  transform: scale(1) rotate(0deg);
+}
+
+.toggle-track.light .icon-moon {
+  opacity: 0.3;
+  transform: scale(0.8) rotate(180deg);
+}
+
+/* Animated Thumb */
+.toggle-thumb {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, var(--primary-cyan) 0%, var(--neon-green) 100%);
+  border-radius: 50%;
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.3),
+    0 0 15px rgba(0, 255, 255, 0.6);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  z-index: 2;
+}
+
+.toggle-track.light .toggle-thumb {
+  transform: translateX(38px);
+  background: linear-gradient(135deg, #ffaa00 0%, #ff6600 100%);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    0 0 15px rgba(255, 153, 0, 0.6);
+}
+
+/* Morphing animation on hover */
+.theme-toggle-btn:hover .toggle-thumb {
+  animation: morph-pulse 0.6s ease-in-out;
+}
+
+@keyframes morph-pulse {
+  0%, 100% {
+    border-radius: 50%;
+  }
+  25% {
+    border-radius: 40% 60% 60% 40% / 60% 40% 60% 40%;
+  }
+  50% {
+    border-radius: 60% 40% 40% 60% / 40% 60% 40% 60%;
+  }
+  75% {
+    border-radius: 50% 50% 40% 60% / 40% 60% 60% 40%;
+  }
+}
+
+/* Glow effect on toggle */
+.theme-toggle-btn:active .toggle-track {
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.5),
+    0 0 40px rgba(0, 255, 255, 0.8);
+}
+
+.theme-toggle-btn:active .toggle-track.light {
+  box-shadow: 
+    inset 0 2px 8px rgba(0, 0, 0, 0.1),
+    0 0 30px rgba(255, 153, 0, 0.8);
+}
+
+/* Toggle Label */
+.toggle-label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-cyan);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  transition: all var(--transition-normal);
+}
+
+[data-theme="light"] .toggle-label {
+  color: #0099cc;
+  text-shadow: 0 0 10px rgba(0, 153, 204, 0.3);
+}
+
+.theme-toggle-btn:hover .toggle-label {
+  text-shadow: 0 0 20px rgba(0, 255, 255, 0.8);
+  transform: translateX(2px);
+}
+
+/* Sparkle effect on click */
+.theme-toggle-btn::after {
+  content: '✦';
+  position: absolute;
+  font-size: 20px;
+  color: var(--primary-yellow);
+  opacity: 0;
+  pointer-events: none;
+  animation: none;
+}
+
+.theme-toggle-btn:active::after {
+  animation: sparkle-pop 0.6s ease-out;
+}
+
+@keyframes sparkle-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.5) rotate(180deg);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .toggle-label {
+    display: none;
+  }
+  
+  .toggle-track {
+    width: 60px;
+    height: 28px;
+  }
+  
+  .toggle-thumb {
+    width: 20px;
+    height: 20px;
+  }
+  
+  .toggle-track.light .toggle-thumb {
+    transform: translateX(32px);
+  }
+}
