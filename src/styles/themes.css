@@ -1,0 +1,174 @@
+/* ============================================
+   THEME MANAGEMENT & TRANSITIONS
+   Dark/Light Mode Switching
+   ============================================ */
+
+/* Theme Transition - Smooth color changes */
+* {
+  transition: background-color 0.3s ease, 
+              color 0.3s ease, 
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+}
+
+/* Prevent transition on page load */
+.preload * {
+  transition: none !important;
+}
+
+/* ==================== DARK THEME (Default) ==================== */
+[data-theme="dark"] {
+  --theme-bg-primary: var(--bg-dark-1);
+  --theme-bg-secondary: var(--bg-dark-2);
+  --theme-bg-tertiary: var(--bg-dark-3);
+  --theme-text: var(--text-primary);
+  --theme-text-secondary: var(--text-secondary);
+  --theme-border: var(--border-cyan);
+  --theme-shadow: var(--shadow-lg);
+  --theme-glow: var(--glow-cyan);
+}
+
+[data-theme="dark"] body {
+  background: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 50%, var(--bg-dark-3) 100%);
+  background-attachment: fixed;
+}
+
+/* Dark Theme - Scrollbar */
+[data-theme="dark"]::-webkit-scrollbar-track {
+  background: var(--bg-dark-1);
+  border-left: 1px solid var(--primary-cyan);
+}
+
+[data-theme="dark"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-cyan) 0%, var(--neon-green) 100%);
+  box-shadow: var(--glow-cyan);
+}
+
+/* ==================== LIGHT THEME ==================== */
+[data-theme="light"] {
+  --theme-bg-primary: #f0f4f8;
+  --theme-bg-secondary: #e6eef5;
+  --theme-bg-tertiary: #dce6f0;
+  --theme-text: #1a1a2e;
+  --theme-text-secondary: #4a4a5a;
+  --theme-border: rgba(0, 153, 204, 0.3);
+  --theme-shadow: var(--shadow-md);
+  --theme-glow: 0 0 15px rgba(0, 153, 204, 0.4);
+}
+
+[data-theme="light"] body {
+  background: linear-gradient(135deg, #f0f4f8 0%, #e6eef5 50%, #dce6f0 100%);
+  background-attachment: fixed;
+}
+
+/* Light Theme - Scrollbar */
+[data-theme="light"]::-webkit-scrollbar-track {
+  background: #f0f4f8;
+  border-left: 1px solid #0099cc;
+}
+
+[data-theme="light"]::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #0099cc 0%, #00aa66 100%);
+  box-shadow: 0 0 10px rgba(0, 153, 204, 0.4);
+}
+
+/* ==================== THEME TOGGLE EFFECTS ==================== */
+
+/* Grid pattern background overlay */
+[data-theme="dark"]::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+[data-theme="light"]::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 153, 204, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 153, 204, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+/* ==================== COMPONENT THEMING ==================== */
+
+/* Card styles based on theme */
+.themed-card {
+  background: var(--bg-card);
+  border: 2px solid var(--theme-border);
+  box-shadow: var(--theme-shadow);
+  color: var(--theme-text);
+}
+
+/* Button styles based on theme */
+.themed-button {
+  background: var(--bg-card);
+  color: var(--theme-text);
+  border: 2px solid var(--theme-border);
+  box-shadow: var(--theme-glow);
+}
+
+.themed-button:hover {
+  box-shadow: var(--theme-glow), var(--glow-cyan-strong);
+  transform: translateY(-2px);
+}
+
+/* Input styles based on theme */
+.themed-input {
+  background: var(--bg-glass);
+  color: var(--theme-text);
+  border: 2px solid var(--theme-border);
+}
+
+.themed-input:focus {
+  border-color: var(--primary-cyan);
+  box-shadow: var(--theme-glow);
+}
+
+[data-theme="light"] .themed-input:focus {
+  border-color: #0099cc;
+}
+
+/* ==================== ACCESSIBILITY ==================== */
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High contrast mode adjustments */
+@media (prefers-contrast: high) {
+  [data-theme="dark"] {
+    --primary-cyan: #00ffff;
+    --text-primary: #ffffff;
+    --bg-dark-1: #000000;
+  }
+  
+  [data-theme="light"] {
+    --text-primary: #000000;
+    --bg-dark-1: #ffffff;
+  }
+}

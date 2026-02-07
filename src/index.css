@@ -1,0 +1,140 @@
+/* ============================================
+   GLOBAL RESET & BASE STYLES
+   ============================================ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  /* Retro Futuristic Color Palette */
+  --primary-cyan: #00ffff;
+  --primary-magenta: #ff00ff;
+  --primary-yellow: #ffff00;
+  --neon-green: #00ff88;
+  --neon-pink: #ff0080;
+  --neon-blue: #0080ff;
+  --neon-orange: #ff8800;
+  
+  /* Background colors */
+  --bg-dark-1: #0a0e27;
+  --bg-dark-2: #1a1a2e;
+  --bg-dark-3: #16213e;
+  --bg-card: rgba(26, 26, 46, 0.8);
+  
+  /* Text colors */
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-muted: #808080;
+  
+  /* Status colors */
+  --color-up: #00ff88;
+  --color-down: #ff0080;
+  --color-neutral: #00ffff;
+  
+  /* Shadows & Glows */
+  --glow-cyan: 0 0 20px rgba(0, 255, 255, 0.6);
+  --glow-magenta: 0 0 20px rgba(255, 0, 255, 0.6);
+  --glow-green: 0 0 20px rgba(0, 255, 136, 0.6);
+  --glow-pink: 0 0 20px rgba(255, 0, 128, 0.6);
+  
+  /* Fonts */
+  --font-primary: 'Rajdhani', sans-serif;
+  --font-display: 'Orbitron', sans-serif;
+  --font-mono: 'Share Tech Mono', monospace;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: linear-gradient(135deg, var(--bg-dark-1) 0%, var(--bg-dark-2) 50%, var(--bg-dark-3) 100%);
+  background-attachment: fixed;
+  color: var(--text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+code {
+  font-family: var(--font-mono);
+}
+
+/* Custom Scrollbar - Retro Style */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-dark-1);
+  border-left: 1px solid var(--primary-cyan);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--primary-cyan) 0%, var(--neon-green) 100%);
+  border-radius: 6px;
+  box-shadow: var(--glow-cyan);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--neon-green) 0%, var(--primary-cyan) 100%);
+  box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+}
+
+/* Selection styling */
+::selection {
+  background: var(--primary-cyan);
+  color: var(--bg-dark-1);
+}
+
+::-moz-selection {
+  background: var(--primary-cyan);
+  color: var(--bg-dark-1);
+}
+
+/* Disable blue highlight on tap for mobile */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Global link styling */
+a {
+  color: var(--primary-cyan);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+a:hover {
+  color: var(--neon-green);
+  text-shadow: var(--glow-green);
+}
+
+/* Global button reset */
+button {
+  font-family: var(--font-primary);
+  cursor: pointer;
+  border: none;
+  outline: none;
+}
+
+/* Global input styling */
+input, textarea, select {
+  font-family: var(--font-primary);
+  outline: none;
+}
+
+/* Utility Classes */
+.text-up {
+  color: var(--color-up);
+}
+
+.text-down {
+  color: var(--color-down);
+}
+
+.text-neutral {
+  color: var(--color-neutral);
+}
