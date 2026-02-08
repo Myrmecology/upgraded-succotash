@@ -1,0 +1,288 @@
+/* ============================================
+   CHARTS COMPONENTS
+   Styles for PieChart, LineChart, BarChart
+   ============================================ */
+
+/* Chart Containers */
+.pie-chart-container,
+.line-chart-container,
+.bar-chart-container {
+  width: 100%;
+  position: relative;
+}
+
+.chart-title {
+  font-family: var(--font-display);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-cyan);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0 0 var(--spacing-md) 0;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  text-align: center;
+}
+
+/* Custom Tooltip */
+.custom-tooltip {
+  background: var(--bg-card);
+  border: 2px solid var(--primary-cyan);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md);
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(0, 255, 255, 0.4);
+  animation: tooltip-appear 0.2s ease-out;
+}
+
+@keyframes tooltip-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.tooltip-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-xs) 0;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.tooltip-value {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-cyan);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  margin: 0;
+}
+
+.tooltip-percent {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--neon-green);
+  margin: var(--spacing-xs) 0 0 0;
+}
+
+/* Pie Chart Legend */
+.pie-legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  margin-top: var(--spacing-lg);
+  padding: var(--spacing-md);
+  background: var(--bg-glass);
+  border: 2px solid var(--border-cyan);
+  border-radius: var(--radius-md);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm);
+  transition: all var(--transition-normal);
+  border-radius: var(--radius-sm);
+  position: relative;
+}
+
+.legend-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: rgba(0, 255, 255, 0.1);
+  transition: width 0.3s ease;
+  border-radius: var(--radius-sm);
+  z-index: 0;
+}
+
+.legend-item:hover::before {
+  width: 100%;
+}
+
+.legend-item:hover {
+  transform: translateX(4px);
+}
+
+.legend-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.legend-symbol {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary-cyan);
+  letter-spacing: 1px;
+  min-width: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+.legend-value {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-primary);
+  flex: 1;
+  text-align: right;
+  position: relative;
+  z-index: 1;
+}
+
+.legend-percent {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-secondary);
+  position: relative;
+  z-index: 1;
+}
+
+/* Chart Empty State */
+.chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  background: var(--bg-glass);
+  border: 2px dashed var(--border-cyan);
+  border-radius: var(--radius-lg);
+}
+
+.chart-empty p {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Recharts Overrides for Retro Style */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: rgba(0, 255, 255, 0.1);
+}
+
+.recharts-legend-wrapper {
+  font-family: var(--font-primary) !important;
+}
+
+.recharts-legend-item-text {
+  color: var(--text-primary) !important;
+  font-weight: 600 !important;
+}
+
+.recharts-default-legend {
+  display: flex !important;
+  justify-content: center !important;
+  gap: var(--spacing-lg) !important;
+}
+
+/* Line Chart Glow Effect */
+.recharts-area path.recharts-curve {
+  filter: drop-shadow(0 0 8px currentColor);
+}
+
+/* Bar Chart Glow Effect */
+.recharts-bar-rectangle {
+  transition: all var(--transition-normal);
+}
+
+.recharts-bar-rectangle:hover {
+  filter: brightness(1.2) drop-shadow(0 0 12px currentColor);
+}
+
+/* Axis Labels Styling */
+.recharts-xAxis .recharts-cartesian-axis-tick-value,
+.recharts-yAxis .recharts-cartesian-axis-tick-value {
+  fill: var(--text-muted);
+  font-family: var(--font-mono);
+  font-size: 11px;
+}
+
+/* Light Theme Adjustments */
+[data-theme="light"] .custom-tooltip {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #0099cc;
+  box-shadow: 
+    0 8px 24px rgba(0, 0, 0, 0.15),
+    0 0 20px rgba(0, 153, 204, 0.3);
+}
+
+[data-theme="light"] .tooltip-value {
+  color: #0099cc;
+  text-shadow: 0 0 8px rgba(0, 153, 204, 0.4);
+}
+
+[data-theme="light"] .tooltip-percent {
+  color: #00aa66;
+}
+
+[data-theme="light"] .pie-legend {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: #0099cc;
+}
+
+[data-theme="light"] .legend-symbol {
+  color: #0099cc;
+}
+
+[data-theme="light"] .chart-empty {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: #0099cc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .chart-title {
+    font-size: 14px;
+  }
+  
+  .pie-legend {
+    padding: var(--spacing-sm);
+  }
+  
+  .legend-item {
+    flex-wrap: wrap;
+  }
+  
+  .legend-value,
+  .legend-percent {
+    font-size: 12px;
+  }
+  
+  .tooltip-value {
+    font-size: 16px;
+  }
+}
+
+/* Animation for chart appearance */
+.pie-chart-container,
+.line-chart-container,
+.bar-chart-container {
+  animation: fade-in-up 0.6s ease-out;
+}
