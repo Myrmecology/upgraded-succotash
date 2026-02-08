@@ -1,0 +1,372 @@
+/* ============================================
+   WATCHLIST COMPONENT
+   Stock monitoring cards with live updates
+   ============================================ */
+
+.watchlist {
+  position: relative;
+}
+
+/* Watchlist Count */
+.watchlist-count {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.count-number {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--primary-cyan);
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  line-height: 1;
+}
+
+.count-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Loading State */
+.loading-watchlist {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-2xl);
+}
+
+.loading-watchlist p {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* No Watchlist State */
+.no-watchlist {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.no-watchlist-icon {
+  font-size: 64px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.no-watchlist h4 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--text-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.no-watchlist p {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Watchlist Grid */
+.watchlist-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+/* Watchlist Card */
+.watchlist-card {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.03) 0%, rgba(0, 255, 136, 0.03) 100%);
+  border: 2px solid var(--border-cyan);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated border effect */
+.watchlist-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, 
+    var(--primary-cyan), 
+    var(--primary-magenta), 
+    var(--neon-green),
+    var(--primary-yellow));
+  border-radius: inherit;
+  opacity: 0;
+  z-index: -1;
+  transition: opacity var(--transition-normal);
+  animation: rotate-border 4s linear infinite;
+}
+
+.watchlist-card:hover::before {
+  opacity: 0.5;
+}
+
+.watchlist-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    0 0 50px rgba(0, 255, 255, 0.5);
+  border-color: var(--primary-cyan);
+}
+
+.watchlist-card:active {
+  transform: translateY(-4px) scale(1.01);
+}
+
+/* Remove Button */
+.btn-remove {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 28px;
+  height: 28px;
+  background: rgba(255, 0, 128, 0.2);
+  border: 2px solid var(--neon-pink);
+  border-radius: 50%;
+  color: var(--neon-pink);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition-normal);
+  opacity: 0;
+  z-index: 10;
+}
+
+.watchlist-card:hover .btn-remove {
+  opacity: 1;
+}
+
+.btn-remove:hover {
+  background: var(--neon-pink);
+  color: var(--bg-dark-1);
+  transform: rotate(90deg) scale(1.1);
+  box-shadow: 0 0 20px rgba(255, 0, 128, 0.6);
+}
+
+.btn-remove:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+/* Card Header */
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
+}
+
+.card-symbol {
+  font-family: var(--font-display);
+  font-size: 24px;
+  font-weight: 900;
+  color: var(--primary-cyan);
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.6);
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+.card-indicator {
+  font-size: 20px;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.8;
+  }
+}
+
+/* Card Price */
+.card-price {
+  margin-bottom: var(--spacing-sm);
+}
+
+.price-value {
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  text-shadow: 0 0 15px currentColor;
+  display: block;
+}
+
+/* Card Change */
+.card-change {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-md);
+  border-bottom: 2px solid var(--border-cyan);
+}
+
+.change-value {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  text-shadow: 0 0 10px currentColor;
+}
+
+.change-percent {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* Card Stats */
+.card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.stat-value {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Card Footer */
+.card-footer {
+  text-align: center;
+  padding-top: var(--spacing-sm);
+  border-top: 2px solid var(--border-cyan);
+}
+
+.footer-text {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0;
+  transition: all var(--transition-normal);
+}
+
+.watchlist-card:hover .footer-text {
+  opacity: 1;
+  color: var(--primary-cyan);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Staggered card animation */
+.watchlist-card {
+  animation: card-appear 0.5s ease-out backwards;
+}
+
+.watchlist-card:nth-child(1) { animation-delay: 0.05s; }
+.watchlist-card:nth-child(2) { animation-delay: 0.1s; }
+.watchlist-card:nth-child(3) { animation-delay: 0.15s; }
+.watchlist-card:nth-child(4) { animation-delay: 0.2s; }
+.watchlist-card:nth-child(5) { animation-delay: 0.25s; }
+.watchlist-card:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes card-appear {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Light Theme Adjustments */
+[data-theme="light"] .watchlist-card {
+  background: linear-gradient(135deg, rgba(0, 153, 204, 0.05) 0%, rgba(0, 170, 102, 0.05) 100%);
+  border-color: #0099cc;
+}
+
+[data-theme="light"] .watchlist-card:hover {
+  border-color: #0099cc;
+  box-shadow: 
+    0 12px 40px rgba(0, 0, 0, 0.15),
+    0 0 40px rgba(0, 153, 204, 0.3);
+}
+
+[data-theme="light"] .card-symbol {
+  color: #0099cc;
+  text-shadow: 0 0 12px rgba(0, 153, 204, 0.4);
+}
+
+[data-theme="light"] .btn-remove {
+  background: rgba(204, 0, 102, 0.2);
+  border-color: #cc0066;
+  color: #cc0066;
+}
+
+[data-theme="light"] .btn-remove:hover {
+  background: #cc0066;
+  color: white;
+  box-shadow: 0 0 15px rgba(204, 0, 102, 0.5);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .watchlist-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-symbol {
+    font-size: 20px;
+  }
+  
+  .price-value {
+    font-size: 28px;
+  }
+  
+  .btn-remove {
+    opacity: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .count-number {
+    font-size: 24px;
+  }
+}
