@@ -97,25 +97,7 @@
   overflow: hidden;
 }
 
-/* Animated border effect */
-.watchlist-card::before {
-  content: '';
-  position: absolute;
-  top: -2px;
-  left: -2px;
-  right: -2px;
-  bottom: -2px;
-  background: linear-gradient(45deg, 
-    var(--primary-cyan), 
-    var(--primary-magenta), 
-    var(--neon-green),
-    var(--primary-yellow));
-  border-radius: inherit;
-  opacity: 0;
-  z-index: -1;
-  transition: opacity var(--transition-normal);
-  animation: rotate-border 4s linear infinite;
-}
+
 
 .watchlist-card:hover::before {
   opacity: 0.5;

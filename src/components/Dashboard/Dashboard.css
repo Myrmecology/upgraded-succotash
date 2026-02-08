@@ -123,19 +123,7 @@
   overflow: hidden;
 }
 
-.quote-display::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: linear-gradient(45deg, 
-    transparent 0%, 
-    rgba(0, 255, 255, 0.05) 50%, 
-    transparent 100%);
-  animation: shimmer 3s linear infinite;
-}
+
 
 @keyframes shimmer {
   0% {

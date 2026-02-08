@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getMarketNews, getStockNews } from '../../services/newsAPI';
-import { getSentimentEmoji, getSentimentBadgeClass } from '../../services/sentimentAPI';
+import { getSentimentEmoji } from '../../services/sentimentAPI';
+import { getSentimentBadgeClass } from '../../services/newsAPI';
 import { formatTimeAgo } from '../../utils/formatters';
 import './NewsPanel.css';
 
