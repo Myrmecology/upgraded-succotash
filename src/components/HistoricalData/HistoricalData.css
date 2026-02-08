@@ -1,0 +1,281 @@
+/* ============================================
+   HISTORICAL DATA COMPONENT
+   Charts and controls for historical stock data
+   ============================================ */
+
+.historical-data {
+  position: relative;
+}
+
+/* Historical Controls */
+.historical-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-lg);
+  background: var(--bg-glass);
+  border: 2px solid var(--border-cyan);
+  border-radius: var(--radius-lg);
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  flex: 1;
+  min-width: 200px;
+}
+
+.control-label {
+  font-family: var(--font-display);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary-cyan);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+}
+
+.control-buttons {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.control-btn {
+  flex: 1;
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 700;
+  padding: var(--spacing-md);
+  border: 2px solid var(--border-cyan);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative;
+  overflow: hidden;
+}
+
+.control-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.3) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: width 0.4s ease, height 0.4s ease;
+  z-index: 0;
+}
+
+.control-btn:hover::before {
+  width: 200px;
+  height: 200px;
+}
+
+.control-btn:hover {
+  border-color: var(--primary-cyan);
+  color: var(--text-primary);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+}
+
+.control-btn.active {
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.2) 0%, rgba(0, 255, 136, 0.2) 100%);
+  border-color: var(--primary-cyan);
+  color: var(--primary-cyan);
+  box-shadow: 
+    0 0 20px rgba(0, 255, 255, 0.4),
+    inset 0 0 10px rgba(0, 255, 255, 0.2);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
+}
+
+.control-btn:active {
+  transform: scale(0.98);
+}
+
+/* Charts Container */
+.charts-container {
+  background: var(--bg-glass);
+  border: 2px solid var(--border-cyan);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+.charts-container::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(0, 255, 255, 0.05) 0%, transparent 70%);
+  animation: rotate-glow 10s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes rotate-glow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Loading State */
+.loading-historical {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-lg);
+  padding: var(--spacing-2xl);
+  background: var(--bg-glass);
+  border: 2px solid var(--border-cyan);
+  border-radius: var(--radius-lg);
+}
+
+.loading-historical p {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+/* No Historical Data State */
+.no-historical {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  background: var(--bg-glass);
+  border: 2px solid var(--border-cyan);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.no-historical-icon {
+  font-size: 64px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.no-historical h4 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  color: var(--text-primary);
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.no-historical p {
+  font-family: var(--font-primary);
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Data Summary */
+.data-summary {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, rgba(0, 255, 136, 0.05) 100%);
+  border: 2px solid var(--border-cyan);
+  border-radius: var(--radius-lg);
+}
+
+.summary-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+  padding: var(--spacing-md);
+  background: var(--bg-glass);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-cyan);
+  transition: all var(--transition-normal);
+}
+
+.summary-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--primary-cyan);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.summary-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.summary-value {
+  font-family: var(--font-display);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--primary-cyan);
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+/* Light Theme Adjustments */
+[data-theme="light"] .control-btn.active {
+  background: linear-gradient(135deg, rgba(0, 153, 204, 0.2) 0%, rgba(0, 170, 102, 0.2) 100%);
+  border-color: #0099cc;
+  color: #0099cc;
+  box-shadow: 
+    0 0 15px rgba(0, 153, 204, 0.3),
+    inset 0 0 8px rgba(0, 153, 204, 0.15);
+  text-shadow: 0 0 8px rgba(0, 153, 204, 0.4);
+}
+
+[data-theme="light"] .control-label {
+  color: #0099cc;
+  text-shadow: 0 0 6px rgba(0, 153, 204, 0.3);
+}
+
+[data-theme="light"] .summary-value {
+  color: #0099cc;
+  text-shadow: 0 0 8px rgba(0, 153, 204, 0.4);
+}
+
+[data-theme="light"] .charts-container,
+[data-theme="light"] .loading-historical,
+[data-theme="light"] .no-historical,
+[data-theme="light"] .data-summary {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: #0099cc;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .historical-controls {
+    flex-direction: column;
+  }
+  
+  .control-group {
+    min-width: 100%;
+  }
+  
+  .control-buttons {
+    flex-wrap: wrap;
+  }
+  
+  .control-btn {
+    font-size: 12px;
+    padding: var(--spacing-sm);
+  }
+  
+  .data-summary {
+    grid-template-columns: 1fr;
+  }
+}
