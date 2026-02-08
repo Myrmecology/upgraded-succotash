@@ -148,7 +148,7 @@
   display: flex;
   align-items: center;
   height: 100%;
-  animation: ticker-scroll 60s linear infinite;
+  animation: ticker-scroll 20s linear infinite;
   will-change: transform;
 }
 
