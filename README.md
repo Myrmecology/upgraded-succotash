@@ -1,4 +1,5 @@
 # 📈 Interactive Stock Market Dashboard
+# FOR A VIDEO DEMO OF THIS PROJECT, PLEASE VISIT: https://www.youtube.com/watch?v=jtHyEPOarF4
 
 A retro-futuristic stock market dashboard with real-time data, portfolio tracking, cryptocurrency prices, and wild 90s sci-fi aesthetics!
 
